@@ -1,4 +1,4 @@
-package com.example.boardv02.board;
+package com.example.boardv02.vo;
 
 import java.util.HashMap;
 

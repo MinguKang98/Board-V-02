@@ -1,6 +1,8 @@
-package com.example.boardv02.board;
+package com.example.boardv02.dao;
 
 import com.example.boardv02.sqlMap.SqlSessionManager;
+import com.example.boardv02.vo.BoardVO;
+import com.example.boardv02.vo.SearchCriteriaPaging;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 

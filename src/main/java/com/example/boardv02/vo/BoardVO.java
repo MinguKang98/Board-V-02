@@ -1,4 +1,4 @@
-package com.example.boardv02.board;
+package com.example.boardv02.vo;
 
 public class BoardVO {
     private int boardId;

@@ -13,7 +13,7 @@
     </settings>
 
     <typeAliases>
-        <typeAlias type="com.example.boardv02.board.BoardVO" alias="BoardVO"/>
+        <typeAlias type="com.example.boardv02.vo.BoardVO" alias="BoardVO"/>
     </typeAliases>
 
     <environments default="development">

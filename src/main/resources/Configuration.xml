@@ -15,6 +15,7 @@
     <typeAliases>
         <typeAlias type="com.example.boardv02.vo.BoardVO" alias="BoardVO"/>
         <typeAlias type="com.example.boardv02.vo.CategoryVO" alias="CategoryVO"/>
+        <typeAlias type="com.example.boardv02.vo.CommentVO" alias="CommentVO"/>
     </typeAliases>
 
     <environments default="development">
@@ -32,6 +33,7 @@
     <mappers>
         <mapper resource="mapper/BoardMapper.xml" />
         <mapper resource="mapper/CategoryMapper.xml" />
+        <mapper resource="mapper/CommentMapper.xml" />
         <mapper resource="mapper/test.xml" />
     </mappers>
 </configuration>

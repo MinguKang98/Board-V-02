@@ -1,5 +1,7 @@
 package com.example.boardv02;
 
+import com.example.boardv02.controller.BoardListController;
+import com.example.boardv02.controller.Controller;
 import com.example.boardv02.dao.BoardDAO;
 import com.example.boardv02.dao.CategoryDAO;
 import com.example.boardv02.vo.BoardVO;
@@ -18,9 +20,15 @@ import javax.servlet.annotation.*;
 @WebServlet(name = "frontControllerServlet", value = "/board/*")
 public class FrontControllerServlet extends HttpServlet {
 
-    private Map<String, Object> controllerMap = new HashMap<>();
+    private Map<String, Controller> controllerMap = new HashMap<>();
 
+    @Override
+    public void init(){
+        controllerMap.put("/board/list.jsp", new BoardListController());
+        controllerMap.put("/board/view.jsp", new BoardListController());
+        controllerMap.put("/board/write.jsp", new BoardListController());
 
+    }
 
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response)
@@ -29,31 +37,11 @@ public class FrontControllerServlet extends HttpServlet {
         String contextPath = request.getContextPath();
         String simpleRequestURI = requestURI.substring(contextPath.length());
 
-        if ("/board/list.jsp".equals(simpleRequestURI)) {
-            BoardDAO boardDAO = new BoardDAO();
-
-            SearchCriteriaPaging search = new SearchCriteriaPaging();
-            search.setCreatedDateFrom(request.getParameter("searchCreatedDateFrom"));
-            search.setCreatedDateTo(request.getParameter("searchCreatedDateTo"));
-            search.setCategoryId(request.getParameter("searchCategoryId"));
-            search.setText(request.getParameter("searchText"));
-            if (request.getParameter("curPage") != null) {
-                search.setCurPage(Integer.parseInt(request.getParameter("curPage")));
-            };
-            int totalCount = boardDAO.getTotalBoardCountWithSearchCriteria(search);
-            search.setTotalRowCount(totalCount);
-            List<BoardVO> boardList = boardDAO.getBoardListWithPagingAndSearchCriteria(search);
-
-            CategoryDAO categoryDAO = new CategoryDAO();
-            List<CategoryVO> categoryList = categoryDAO.getCategoryList();
-
-            request.setAttribute("searchCriteria", search);
-            request.setAttribute("totalCount",totalCount);
-            request.setAttribute("boardList", boardList);
-            request.setAttribute("categoryList",categoryList);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/board/list.jsp");
-            dispatcher.forward(request, response);
+        Controller controller = controllerMap.get(simpleRequestURI);
+        if (controller == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
         }
-
+        controller.process(request, response);
     }
 }

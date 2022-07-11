@@ -19,7 +19,7 @@
                 AND (DATE(created_date) BETWEEN #{createdDateFrom} AND #{createdDateTo})
             </if>
         </if>
-        <if test="!(categoryId == null or categoryId == 0)">
+        <if test="!(categoryId == null or ''.equals(categoryId) or '0'.equals(categoryId))">
             AND category_id = #{categoryId}
         </if>
         <if test="!(text == null or ''.equals(text))">

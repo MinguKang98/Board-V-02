@@ -19,7 +19,7 @@ public class SearchCriteriaPaging {
     // 검색 기록
     private String createdDateFrom; // 등록일
     private String createdDateTo; // 등록일
-    private int categoryId; // 카테고리
+    private String categoryId; // 카테고리
     private String text; // 제목 or 작성자 or 텍스트
 
 
@@ -144,11 +144,11 @@ public class SearchCriteriaPaging {
         this.createdDateTo = createdDateTo;
     }
 
-    public int getCategoryId() {
+    public String getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(int categoryId) {
+    public void setCategoryId(String categoryId) {
         this.categoryId = categoryId;
     }
 

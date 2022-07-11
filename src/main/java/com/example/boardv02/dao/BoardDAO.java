@@ -128,7 +128,7 @@ public class BoardDAO {
         SearchCriteriaPaging search = new SearchCriteriaPaging();
         search.setCreatedDateFrom("2022-07-10");
         search.setCreatedDateTo("2022-07-11");
-        search.setCategoryId(4);
+        search.setCategoryId("4");
         search.setText("test");
         int count = boardDAO.getTotalBoardCountWithSearchCriteria(search);
         System.out.println("count = " + count);

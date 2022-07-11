@@ -14,15 +14,15 @@
 
     <select id="getTotalBoardCountWithSearchCriteria" parameterType="map" resultType="int">
         SELECT COUNT(*) FROM board WHERE 1=1
-        <if test="!(createdDateFrom == null or ''.equals(createdDateFrom))">
-            <if test="!(createdDateTo == null or ''.equals(createdDateTo))">
+        <if test='!(createdDateFrom == null or "".equals(createdDateFrom))'>
+            <if test='!(createdDateTo == null or "".equals(createdDateTo))'>
                 AND (DATE(created_date) BETWEEN #{createdDateFrom} AND #{createdDateTo})
             </if>
         </if>
-        <if test="!(categoryId == null or ''.equals(categoryId) or '0'.equals(categoryId))">
+        <if test='!(categoryId == null or "".equals(categoryId) or "0".equals(categoryId))'>
             AND category_id = #{categoryId}
         </if>
-        <if test="!(text == null or ''.equals(text))">
+        <if test='!(text == null or "".equals(text))'>
             AND (user LIKE CONCAT('%',#{text},'%')
                      OR title LIKE CONCAT('%',#{text},'%')
                      OR content LIKE CONCAT('%',#{text},'%'))
@@ -37,10 +37,10 @@
                     AND (DATE(created_date) BETWEEN #{createdDateFrom} AND #{createdDateTo})
                 </if>
             </if>
-            <if test="!(categoryId == null or categoryId == 0)">
+            <if test='!(categoryId == null or "".equals(categoryId) or "0".equals(categoryId))'>
                 AND category_id = #{categoryId}
             </if>
-            <if test="!(text == null or ''.equals(text))">
+            <if test='!(text == null or "".equals(text))'>
                 AND (user LIKE CONCAT('%',#{text},'%')
                 OR title LIKE CONCAT('%',#{text},'%')
                 OR content LIKE CONCAT('%',#{text},'%'))

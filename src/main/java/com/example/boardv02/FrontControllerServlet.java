@@ -1,17 +1,10 @@
 package com.example.boardv02;
 
 import com.example.boardv02.controller.*;
-import com.example.boardv02.dao.BoardDAO;
-import com.example.boardv02.dao.CategoryDAO;
-import com.example.boardv02.vo.BoardVO;
-import com.example.boardv02.vo.CategoryVO;
-import com.example.boardv02.vo.SearchCriteriaPaging;
 
 import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -28,6 +21,8 @@ public class FrontControllerServlet extends HttpServlet {
         controllerMap.put("/board/commentSave", new CommentSaveController());
         controllerMap.put("/board/write.jsp", new BoardWriteController());
         controllerMap.put("/board/boardSave", new BoardSaveController());
+        controllerMap.put("/board/passwordCheck.jsp", new PasswordCheckController());
+        controllerMap.put("/board/passwordConfirm", new PasswordConfirmController());
     }
 
     @Override

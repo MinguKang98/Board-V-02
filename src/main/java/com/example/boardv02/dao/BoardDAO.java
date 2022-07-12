@@ -123,6 +123,38 @@ public class BoardDAO {
         }
     }
 
+    // 댓글수 증가
+    public void updateCommentCount(int boardId) {
+        SqlSessionFactory sqlSessionFactory = SqlSessionManager.getSqlSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+        try{
+            sqlSession.delete("BoardMapper.updateCommentCount", boardId);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            sqlSession.close();
+        }
+    }
+
+    // 조회수 증가
+    public void updateVisitCount(int boardId) {
+        SqlSessionFactory sqlSessionFactory = SqlSessionManager.getSqlSession();
+        SqlSession sqlSession = sqlSessionFactory.openSession(true);
+
+        try{
+            sqlSession.delete("BoardMapper.updateVisitCount", boardId);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        finally {
+            sqlSession.close();
+        }
+    }
+
     public static void main(String[] args) {
         BoardDAO boardDAO = new BoardDAO();
         SearchCriteriaPaging search = new SearchCriteriaPaging();

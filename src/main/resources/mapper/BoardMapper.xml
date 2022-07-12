@@ -58,4 +58,12 @@
     <delete id="deleteBoard" parameterType="int">
         DELETE FROM board WHERE board_id = #{boardId}
     </delete>
+
+    <update id="updateCommentCount" parameterType="int">
+        UPDATE board SET comment_count = comment_count + 1 WHERE board_id = #{boardId}
+    </update>
+
+    <update id="updateVisitCount" parameterType="int">
+        UPDATE board SET visit_count = visit_count + 1 WHERE board_id = #{boardId}
+    </update>
 </mapper>

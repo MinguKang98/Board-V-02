@@ -1,9 +1,6 @@
 package com.example.boardv02;
 
-import com.example.boardv02.controller.BoardListController;
-import com.example.boardv02.controller.BoardViewController;
-import com.example.boardv02.controller.CommentSaveController;
-import com.example.boardv02.controller.Controller;
+import com.example.boardv02.controller.*;
 import com.example.boardv02.dao.BoardDAO;
 import com.example.boardv02.dao.CategoryDAO;
 import com.example.boardv02.vo.BoardVO;
@@ -29,6 +26,8 @@ public class FrontControllerServlet extends HttpServlet {
         controllerMap.put("/board/list.jsp", new BoardListController());
         controllerMap.put("/board/view.jsp", new BoardViewController());
         controllerMap.put("/board/commentSave", new CommentSaveController());
+        controllerMap.put("/board/write.jsp", new BoardWriteController());
+        controllerMap.put("/board/boardSave", new BoardSaveController());
     }
 
     @Override

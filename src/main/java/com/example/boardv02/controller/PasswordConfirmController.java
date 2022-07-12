@@ -36,7 +36,7 @@ public class PasswordConfirmController implements Controller {
             // 다르면 passwordCheck 로
             request.setAttribute("confirm", "fail");
             RequestDispatcher dispatcher = request.getRequestDispatcher(
-                    "/WEB-INF/board/passwordCheck.jsp?boardId=" + boardId + "&type=" + type);
+                    "/WEB-INF/board/passwordCheck.jsp");
             dispatcher.forward(request, response);
 
         }

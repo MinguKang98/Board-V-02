@@ -21,10 +21,11 @@
     int totalCount = (int) request.getAttribute("totalCount");
     SearchCriteriaPaging search = (SearchCriteriaPaging) request.getAttribute("searchCriteria");
 
-    int prevPage = (search.getCurPage() - 1 < search.getFirstPage()) ?
-            search.getFirstPage() : search.getCurPage() - 1;
-    int nextPage = (search.getCurPage() + 1 > search.getTotalPageCount()) ?
-            search.getTotalPageCount() : search.getCurPage() + 1;
+    int prevPage = (search.getCurPage() - 10 < 0) ? 1 : search.getCurPage() - 10;
+    int nextPage = (search.getCurPage() + 10 > search.getTotalPageCount()) ?
+            search.getTotalPageCount() : search.getCurPage() + 10;
+
+    String searchCategoryId = ("".equals(search.getCategoryId()))? "0" : search.getCategoryId();
 %>
 
 <html>
@@ -46,7 +47,7 @@
         <label> ~ </label>
         <input type="date" name="searchCreatedDateTo" id="searchCreatedDateTo"/>
         <select name="searchCategoryId" id="searchCategoryId">
-            <option value="0">전체 카테고리</option>
+            <option value="0" selected>전체 카테고리</option>
 <%
     for (CategoryVO category : categoryList) {
 %>
@@ -86,7 +87,7 @@
         <td><%=(board.isFileExist()) ? "<i class=\"fas fa-paperclip\"></i>\n" : " "%>
         </td>
         <td>
-            <a href="view.jsp?boardId=<%=board.getBoardId()%>">
+            <a href="view.jsp?boardId=<%=board.getBoardId()%>&curPage=<%=search.getCurPage()%>&searchCreatedDateFrom=<%=search.getCreatedDateFrom()%>&searchCreatedDateTo=<%=search.getCreatedDateTo()%>&searchCategoryId=<%=search.getCategoryId()%>&searchText=<%=search.getText()%>">
                 <%=board.getTitle()%> (<%=board.getCommentCount()%>)
             </a></td>
         <td><%=board.getTitle()%>
@@ -106,10 +107,10 @@
 
 <nav>
     <ul>
-        <li><a href="list.jsp?curPage=1">
+        <li><a href="list.jsp?curPage=1&searchCreatedDateFrom=<%=search.getCreatedDateFrom()%>&searchCreatedDateTo=<%=search.getCreatedDateTo()%>&searchCategoryId=<%=search.getCategoryId()%>&searchText=<%=search.getText()%>">
             <i class="fas fa-chevron-left"></i><i class="fas fa-chevron-left"></i>
         </a></li>
-        <li><a href="list.jsp?curPage=<%=prevPage%>"><i class="fas fa-chevron-left"></i></a></li>
+        <li><a href="list.jsp?curPage=<%=prevPage%>&searchCreatedDateFrom=<%=search.getCreatedDateFrom()%>&searchCreatedDateTo=<%=search.getCreatedDateTo()%>&searchCategoryId=<%=search.getCategoryId()%>&searchText=<%=search.getText()%>"><i class="fas fa-chevron-left"></i></a></li>
 <%
     for (int i = search.getFirstPage(); i <= search.getLastPage(); i++) {
         if (i == search.getCurPage()) {
@@ -118,13 +119,13 @@
 <%
         }else{
 %>
-        <li><a href="list.jsp?curPage=<%=i%>"><%=i%></a></li>
+        <li><a href="list.jsp?curPage=<%=i%>&searchCreatedDateFrom=<%=search.getCreatedDateFrom()%>&searchCreatedDateTo=<%=search.getCreatedDateTo()%>&searchCategoryId=<%=search.getCategoryId()%>&searchText=<%=search.getText()%>"><%=i%></a></li>
 <%
         }
     }
 %>
-        <li><a href="list.jsp?curPage=<%=nextPage%>"><i class="fas fa-chevron-right"></i></a></li>
-        <li><a href="list.jsp?curPage=<%=search.getTotalPageCount()%>">
+        <li><a href="list.jsp?curPage=<%=nextPage%>&searchCreatedDateFrom=<%=search.getCreatedDateFrom()%>&searchCreatedDateTo=<%=search.getCreatedDateTo()%>&searchCategoryId=<%=search.getCategoryId()%>&searchText=<%=search.getText()%>"><i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="list.jsp?curPage=<%=search.getTotalPageCount()%>&searchCreatedDateFrom=<%=search.getCreatedDateFrom()%>&searchCreatedDateTo=<%=search.getCreatedDateTo()%>&searchCategoryId=<%=search.getCategoryId()%>&searchText=<%=search.getText()%>">
             <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i>
         </a></li>
     </ul>
@@ -135,5 +136,43 @@
         등록
     </button>
 </div>
+
+<script>
+    function getDate() {
+        var today = new Date();
+        var year = today.getFullYear();
+        var month = ('0' + (today.getMonth() + 1)).slice(-2);
+        var day = ('0' + today.getDate()).slice(-2);
+        return year + '-' + month + '-' + day;
+    }
+
+    var searchCreatedDateFrom = document.getElementById("searchCreatedDateFrom");
+    var searchCreatedDateTo = document.getElementById("searchCreatedDateTo");
+    var searchCategory = document.getElementById("searchCategoryId");
+    var searchText = document.getElementById("searchText");
+
+    // 등록일 값이 없을때 오늘 반환
+    if (<%="".equals(search.getCreatedDateFrom())%>) {
+        searchCreatedDateFrom.value = getDate();
+    } else {
+        searchCreatedDateFrom.value = "<%=search.getCreatedDateFrom()%>";
+    }
+
+    if (<%="".equals(search.getCreatedDateTo())%>) {
+        searchCreatedDateTo.value = getDate();
+    } else {
+        searchCreatedDateTo.value = "<%=search.getCreatedDateTo()%>";
+    }
+
+    // 값이 있으면 카테고리 value 반환
+    searchCategory.options[<%=searchCategoryId%>].selected = "selected";
+
+    // 값이 있으면 text value 반환
+    if (!<%="".equals(search.getText())%>) {
+        searchText.value = "<%=search.getText()%>";
+    }
+
+</script>
+
 </body>
 </html>

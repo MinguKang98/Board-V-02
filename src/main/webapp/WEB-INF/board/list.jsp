@@ -91,7 +91,7 @@
             </a></td>
         <td><%=board.getTitle()%>
         </td>
-        <td><%=board.getCommentCount()%>
+        <td><%=board.getVisitCount()%>
         </td>
         <td><%=board.getCreatedDate()%>
         </td>

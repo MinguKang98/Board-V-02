@@ -16,7 +16,7 @@ public class SearchCriteriaPaging {
     private int firstPage; // 현재 보이는 처음 페이지
     private int lastPage; // 현재 보이는 마지막 페이지
 
-    // 검색 기록
+    // 검색 조건
     private String createdDateFrom; // 등록일
     private String createdDateTo; // 등록일
     private String categoryId; // 카테고리
@@ -60,9 +60,7 @@ public class SearchCriteriaPaging {
         return curPage;
     }
 
-    public void setCurPage(int curPage) {
-        this.curPage = curPage;
-    }
+    public void setCurPage(int curPage) { this.curPage = curPage; }
 
     public int getRowSizePerPage() {
         return rowSizePerPage;
@@ -133,7 +131,11 @@ public class SearchCriteriaPaging {
     }
 
     public void setCreatedDateFrom(String createdDateFrom) {
-        this.createdDateFrom = createdDateFrom;
+        if (createdDateFrom == null) {
+            this.createdDateFrom = "";
+        } else {
+            this.createdDateFrom = createdDateFrom;
+        }
     }
 
     public String getCreatedDateTo() {
@@ -141,7 +143,11 @@ public class SearchCriteriaPaging {
     }
 
     public void setCreatedDateTo(String createdDateTo) {
-        this.createdDateTo = createdDateTo;
+        if (createdDateTo == null) {
+            this.createdDateTo = "";
+        } else {
+            this.createdDateTo = createdDateTo;
+        }
     }
 
     public String getCategoryId() {
@@ -149,7 +155,11 @@ public class SearchCriteriaPaging {
     }
 
     public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+        if (categoryId == null) {
+            this.categoryId = "";
+        } else {
+            this.categoryId = categoryId;
+        }
     }
 
     public String getText() {
@@ -157,19 +167,17 @@ public class SearchCriteriaPaging {
     }
 
     public void setText(String text) {
-        this.text = text;
+        if (text == null) {
+            this.text = "";
+        } else {
+            this.text = text;
+        }
     }
 
     public static void main(String[] args) {
         SearchCriteriaPaging paging= new SearchCriteriaPaging();
-        paging.setCurPage(11);
-        paging.setTotalRowCount(108);
-        paging.pageSetting();
-
-        System.out.println("paging.getFirstRow() = " + paging.getFirstRow());
-        System.out.println("paging.getLastRow() = " + paging.getLastRow());
-        System.out.println("paging.getTotalPageCount() = " + paging.getTotalPageCount());
-        System.out.println("paging.getFirstPage() = " + paging.getFirstPage());
-        System.out.println("paging.getLastPage() = " + paging.getLastPage());
+        paging.setCreatedDateFrom(null);
+        boolean test = ((paging.getCreatedDateFrom()) == null);
+        System.out.println("test = " + test);
     }
 }

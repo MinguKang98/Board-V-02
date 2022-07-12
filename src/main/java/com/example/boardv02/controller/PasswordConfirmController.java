@@ -25,9 +25,7 @@ public class PasswordConfirmController implements Controller {
         if (inputPassword.equals(originPassword)) {
             // 같으면 type 에 따라 다음 절차
             if (type.equals("modify")) { // 게시판 수정
-                RequestDispatcher dispatcher = request.getRequestDispatcher(
-                        "/WEB-INF/board/modify.jsp?boardId=" + boardId);
-                dispatcher.forward(request, response);
+                response.sendRedirect("modify.jsp?boardId=" + boardId);
             }
 
             if (type.equals("delete")) { // 게시판 삭제

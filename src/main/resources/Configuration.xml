@@ -23,7 +23,7 @@
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/board_v2" />
+                <property name="url" value="jdbc:mysql://localhost:3306/board_v2?useUnicode=true&amp;characterEncoding=utf8" />
                 <property name="username" value="mingu" />
                 <property name="password" value="1234" />
             </dataSource>

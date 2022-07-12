@@ -1,6 +1,8 @@
 package com.example.boardv02;
 
 import com.example.boardv02.controller.BoardListController;
+import com.example.boardv02.controller.BoardViewController;
+import com.example.boardv02.controller.CommentSaveController;
 import com.example.boardv02.controller.Controller;
 import com.example.boardv02.dao.BoardDAO;
 import com.example.boardv02.dao.CategoryDAO;
@@ -25,14 +27,15 @@ public class FrontControllerServlet extends HttpServlet {
     @Override
     public void init(){
         controllerMap.put("/board/list.jsp", new BoardListController());
-        controllerMap.put("/board/view.jsp", new BoardListController());
-        controllerMap.put("/board/write.jsp", new BoardListController());
-
+        controllerMap.put("/board/view.jsp", new BoardViewController());
+        controllerMap.put("/board/commentSave", new CommentSaveController());
     }
 
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         String requestURI = request.getRequestURI();
         String contextPath = request.getContextPath();
         String simpleRequestURI = requestURI.substring(contextPath.length());

@@ -74,9 +74,9 @@
 </div>
 
 <div>
-    <button type="button" onclick="history.back()">목록</button>
-    <button type="button" onclick="location.href=''">수정</button>
-    <button type="button" onclick="location.href=''">삭제</button>
+    <button type="button" onclick="location.href='list.jsp'">목록</button>
+    <button type="button" onclick="location.href='passwordCheck.jsp?boardId=<%=board.getBoardId()%>&type=modify'">수정</button>
+    <button type="button" onclick="location.href='passwordCheck.jsp?boardId=<%=board.getBoardId()%>&type=delete'">삭제</button>
 </div>
 </body>
 </html>

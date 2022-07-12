@@ -24,6 +24,7 @@ public class FrontControllerServlet extends HttpServlet {
         controllerMap.put("/board/passwordCheck.jsp", new PasswordCheckController());
         controllerMap.put("/board/passwordConfirm", new PasswordConfirmController());
         controllerMap.put("/board/boardDelete", new BoardDeleteController());
+        controllerMap.put("/board/modify.jsp", new BoardModifyController());
     }
 
     @Override
